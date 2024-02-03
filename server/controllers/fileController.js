@@ -42,6 +42,7 @@ const shortid = require('shortid');
         res.status(500).json({ message: 'Internal Server Error' });
     } 
   }
+  
   const getFiles = async (req, res) => {
     try {
         const userId = req.params.userId;

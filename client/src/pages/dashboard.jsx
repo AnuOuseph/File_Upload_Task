@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setRefetch } from '../redux/userSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fileUpload } from '../../../server/controllers/fileController';
+import { useNavigate } from 'react-router-dom';
 
 
 function Dashboard() {
@@ -98,16 +98,25 @@ function Dashboard() {
         }
     };
 
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        // Remove the token from localStorage
+        localStorage.removeItem("token");
+     
+        // Navigate to the sign-in page
+        navigate("/login");
+      };
+
   return (
     <div className="bg-white h-screen w-full flex justify-center items-center">
-        <div className="bg-white mx-2 my-8 py-0 w-[50%]">
+        <div className="bg-white mx-2 my-8 py-0 w-[50%]"> 
             <div className="flex justify-between">
                 <div>
                   <p className="text-md uppercase text-gray-700 font-medium px-4 py-4">Files</p>
                 </div>
                 <div className='flex items-center'>
                     <p className="text-md uppercase text-gray-700 font-medium px-4 py-4">{user?.data?.username}</p>
-                    <button className='px-1'>Logout</button>
+                    <button onClick={handleLogout} className='px-1'>Logout</button>
                 </div>
             </div>
             <hr className='my-2' />
