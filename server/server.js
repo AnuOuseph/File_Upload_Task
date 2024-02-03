@@ -4,12 +4,12 @@ const connectDB = require('./config/db');
 const app = express();
 const authRouter = require('./routes/auth');
 const fileRouter = require('./routes/file')
-const multer = require('multer');
+const cors = require('cors')
 
 dotenv.config();
 connectDB();
 
-
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/auth',authRouter);
