@@ -1,4 +1,3 @@
-import './App.css'
 import Dashboard from './pages/dashboard'
 import Login from './pages/login'
 import Register from './pages/register'
