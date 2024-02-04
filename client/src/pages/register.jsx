@@ -44,7 +44,7 @@ function Register() {
                 <input value={password} onChange={(e) => setPassword(e.target.value)} className="px-4 py-1 border border-gray-500" type="password" placeholder="password" />
             </div>
             <div className="my-3 mx-5">
-                <button onClick={submit} className="px-2 py-1 text-sm">Create</button>
+                <button onClick={submit} className="px-2 border border-gray-500 bg-black text-white py-1 text-sm">Create</button>
             </div>
             <p className="my-2 mx-5 text-sm">Already a user? <span className="text-blue-500 text-md"><Link to="/login">Login</Link></span></p>
         </div>

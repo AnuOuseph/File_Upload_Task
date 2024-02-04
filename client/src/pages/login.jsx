@@ -44,7 +44,7 @@ function Login() {
             <input value={password} onChange={(e) => setPassword(e.target.value)} className="px-4 py-1 border border-gray-500" type="password" placeholder="password" />
         </div>
         <div className="my-3 mx-5">
-            <button onClick={submit} className="px-2 py-1 text-sm">Login</button>
+            <button onClick={submit} className="px-2 py-1 text-sm border border-gray-500 bg-black text-white">Login</button>
         </div>
         <p className="my-2 mx-5 text-sm">Create new account? <span className="text-blue-500 text-md"><Link to="/register">Register</Link></span></p>
       </div>

@@ -5,11 +5,9 @@ const shortid = require('shortid');
 
   const fileUpload = async (req, res) => {
     try {
-        console.log('Uploaded File:', req.body.file);
 
         const fileContent = req.body.file;
         const userId = req.body.id;
-        console.log("hoo",userId)
 
         const createFolder = (folderPath) => {
             if (!fs.existsSync(folderPath)) {
@@ -38,7 +36,6 @@ const shortid = require('shortid');
 
         return res.status(200).json({ message: 'File uploaded successfully' });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     } 
   }
@@ -54,9 +51,7 @@ const shortid = require('shortid');
         } else {
             return res.status(404).json({ message: 'User folder not found' });
         }
-
     }catch(error){
-        console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
   }
@@ -78,7 +73,6 @@ const shortid = require('shortid');
             return res.status(404).json({ message: 'User folder not found' });
         }
     } catch (error) {
-        console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
   }
@@ -91,21 +85,15 @@ const shortid = require('shortid');
         const userFolder = path.join('uploads', userId);
         const filePath = path.join(userFolder, fileName);
 
-        // Check if the user-specific folder exists
         if (fs.existsSync(userFolder)) {
-            // Check if the file exists
             if (fs.existsSync(filePath)) {
-                // Verify the unique code before allowing the download
                 const storedUniqueCode = fileName.split('_')[0];
                 if (uniqueCode === storedUniqueCode) {
                     const pathFile = path.join(__dirname,"..", 'uploads', userId, fileName);
-                    console.log(pathFile)
                     res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
                     res.setHeader('Content-Type', 'application/octet-stream');
-
-                    // Stream the file to the response
-                    const fileStream = fs.createReadStream(pathFile);
-                    fileStream.pipe(res);
+                    const fileUrl = fs.readFileSync(pathFile);
+                    res.end(fileUrl);
                 } else {
                     return res.status(403).json({ message: 'Invalid unique code' });
                 }
@@ -116,7 +104,6 @@ const shortid = require('shortid');
             return res.status(404).json({ message: 'User folder not found' });
         }
     } catch (error) {
-        console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
   }
